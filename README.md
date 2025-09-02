@@ -1,2 +1,198 @@
-# DeepAI Code Snippet
-A [project](https://livecodes.io/?x=https://github.com/sailorssylus/e-commerce-/tree/gh-pages/src) created by [sailorssylus](https://github.com/sailorssylus) on [LiveCodes](https://livecodes.io).
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sailors Electronics</title>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      background: pink; /* Changed background to pink */
+      margin: 0; 
+      padding: 0; 
+    }
+
+    /* Animation container at the top */
+    .animation-top {
+      width: 100%;
+      height: 50px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Moving banner or animated element */
+    .banner {
+      width: 200px;
+      height: 30px;
+      background-color: #ff69b4; /* Hot pink */
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+      position: absolute;
+      animation: moveAcross 4s linear infinite;
+    }
+
+    @keyframes moveAcross {
+      0% { left: -200px; }
+      100% { left: 100%; }
+    }
+
+    header { background: #333; color: #fff; padding: 20px; text-align: center; }
+    .container { padding: 20px; max-width: 1200px; margin: auto; }
+    .filters, .products { margin-bottom: 20px; }
+    .filters label, .filters select, .filters input { margin-right: 10px; padding: 8px; }
+    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+    .product { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align: center; }
+    .product img { max-width: 100%; height: auto; }
+    .product h3 { margin: 10px 0; font-size: 18px; }
+    .product p { font-size: 16px; margin: 5px 0; }
+    .whatsapp-btn { display: inline-block; margin-top: 10px; padding: 10px 15px; background: green; color: #fff; text-decoration: none; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <!-- Top animated banner -->
+  <div class="animation-top">
+    <div class="banner">Welcome to Sailors Electronics!</div>
+  </div>
+  
+  <header>
+    <h1>Sailors Electronics</h1>
+  </header>
+  <div class="container">
+    <div class="filters">
+      <label for="brandFilter">Brand:</label>
+      <select id="brandFilter">
+        <option value="all">All</option>
+        <option value="samsung">Samsung</option>
+        <option value="itel">Itel</option>
+        <option value="tecno">Tecno</option>
+        <option value="infinix">Infinix</option>
+        <option value="hp">HP</option>
+        <option value="lenovo">Lenovo</option>
+        <option value="visionplus">Vision Plus</option>
+      </select>
+      <label for="priceFilter">Price:</label>
+      <select id="priceFilter">
+        <option value="all">All</option>
+        <option value="0-5000">Under 5,000</option>
+        <option value="5000-10000">5,000 - 10,000</option>
+        <option value="10000-20000">10,000 - 20,000</option>
+        <option value="20000+">Above 20,000</option>
+      </select>
+      <input type="text" id="searchInput" placeholder="Search products...">
+    </div>
+    <div class="products" id="productList"></div>
+  </div>
+
+  <script>
+    const products = [
+      {
+        name: "Samsung Galaxy A06, 6.7\" 128GB + 4GB RAM",
+        price: 12250,
+        image: "https://images.samsung.com/is/image/samsung/assets/ke/smartphones/galaxy-a06/a06-thumb-black.png",
+        brand: "samsung",
+        whatsapp: "12250"
+      },
+      {
+        name: "Vitron HTC4388FS - 43\" Smart Android TV",
+        price: 17255,
+        image: "https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/63/790354/1.jpg?2604",
+        brand: "vitron",
+        whatsapp: "17255"
+      },
+      {
+        name: "Lyons Water Dispenser Hot/Normal Cabinet",
+        price: 2599,
+        image: "https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/71/358126/1.jpg",
+        brand: "lyons",
+        whatsapp: "2599"
+      },
+      {
+        name: "HP EliteBook 820 G1 8GB RAM 1TB HDD",
+        price: 25300,
+        image: "https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/14/597065/1.jpg",
+        brand: "hp",
+        whatsapp: "25300"
+      },
+      
+      {
+        name: "Apple MacBook Pro 13\" Core i5 16GB RAM 512GB",
+        price: 33500,
+        image: "https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/97/202405/1.jpg",
+        brand: "apple",
+        whatsapp: "33500"
+      },
+      {
+        name: "Oraimo FreePods Neo ENC Wireless Earbods",
+        price: 1840,
+        image: "https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/18/309227/1.jpg",
+        brand: "oraimo",
+        whatsapp: "1840"
+      },
+      {
+        name: "Samsung Galaxy A56 5G 128GB + 8GB RAM",
+        price: 46129,
+        image: "https://images.samsung.com/is/image/samsung/assets/ke/smartphones/galaxy-a56/a56-thumb.png",
+        brand: "samsung",
+        whatsapp: "46129"
+      },
+      {
+        name: "Lenovo Thinkpad T440 Intel i5 8GB 500GB",
+        price: 13999,
+        image: "https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/41/142865/1.jpg",
+        brand: "lenovo",
+        whatsapp: "13999"
+      }
+    ];
+
+    const productList = document.getElementById("productList");
+
+    function displayProducts(filteredProducts) {
+      productList.innerHTML = "";
+      filteredProducts.forEach(product => {
+        const el = document.createElement("div");
+        el.className = "product";
+        el.setAttribute("data-brand", product.brand);
+        el.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" />
+          <h3>${product.name}</h3>
+          <p>KSh ${product.price.toLocaleString()}</p>
+          <a class="whatsapp-btn" href="https://wa.me/254715428101?text=I'm%20interested%20in%20${encodeURIComponent(product.name)}%20for%20KSh%20${product.price}" target="_blank">Buy on WhatsApp</a>
+        `;
+        productList.appendChild(el);
+      });
+    }
+
+    function filterProducts() {
+      const brand = document.getElementById("brandFilter").value;
+      const price = document.getElementById("priceFilter").value;
+      const searchQuery = document.getElementById("searchInput").value.toLowerCase();
+
+      let filtered = products;
+      if (brand !== "all") filtered = filtered.filter(p => p.brand === brand);
+      if (price !== "all") {
+        const [min, max] = price.includes("+") ? [20000, Infinity] : price.split("-").map(Number);
+        filtered = filtered.filter(p => p.price >= min && p.price <= (max || Infinity));
+      }
+      if (searchQuery) {
+        filtered = filtered.filter(p => p.name.toLowerCase().includes(searchQuery));
+      }
+
+      displayProducts(filtered);
+    }
+
+    document.getElementById("brandFilter").addEventListener("change", filterProducts);
+    document.getElementById("priceFilter").addEventListener("change", filterProducts);
+    document.getElementById("searchInput").addEventListener("input", filterProducts);
+
+    // Initialize display
+    displayProducts(products);
+  </script>
+</body>
+</html>
